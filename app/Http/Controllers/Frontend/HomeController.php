@@ -17,23 +17,23 @@ class HomeController extends Controller
     # set theme
     public function theme($name = "")
     {
-        
+
         $active_themes = getSetting('active_themes') != null ? json_decode(getSetting('active_themes')) : [1];
         $theme = Theme::whereIn('id', $active_themes)->where('code', $name)->first();
 
-        if(session('theme') != $name){ 
+        if(session('theme') != $name){
             if (Auth::check()) {
-                 Cart::where('user_id', Auth::user()->id)->delete();
+                Cart::where('user_id', Auth::user()->id)->delete();
             } else {
-                 Cart::where('guest_user_id', (int) $_COOKIE['guest_user_id'])->delete();
-            } 
-         }
+                Cart::where('guest_user_id', (int) $_COOKIE['guest_user_id'])->delete();
+            }
+        }
 
-        if(!is_null($theme)){ 
+        if(!is_null($theme)){
             session(['theme' => $name]);
         }else{
             flash(localize('The page you are looking for is not available at this moment'))->error();
-        }  
+        }
 
         return redirect()->route('home');
     }
@@ -41,16 +41,16 @@ class HomeController extends Controller
     # homepage
     public function index()
     {
-        $blogs = Blog::isActive()->latest()->take(3); 
+        $blogs = Blog::isActive()->latest()->take(3);
 
-        if(getTheme() == "default"){ 
+        if(getTheme() == "default"){
             $blogs = $blogs->get();
-            
+
             $sliders = [];
             if (getSetting('hero_sliders') != null) {
                 $sliders = json_decode(getSetting('hero_sliders'));
             }
-    
+
             $banner_section_one_banners = [];
             if (getSetting('banner_section_one_banners') != null) {
                 $banner_section_one_banners = json_decode(getSetting('banner_section_one_banners'));
@@ -59,10 +59,27 @@ class HomeController extends Controller
             $client_feedback = [];
             if (getSetting('client_feedback') != null) {
                 $client_feedback = json_decode(getSetting('client_feedback'));
-            } 
-        }else if(getTheme() == "halal"){ 
-            
-            $sliders = []; 
+            }
+        } else if(getTheme() == "skinoasis"){
+            $blogs = $blogs->get();
+
+            $sliders = [];
+            if (getSetting('hero_sliders') != null) {
+                $sliders = json_decode(getSetting('hero_sliders'));
+            }
+
+            $banner_section_one_banners = [];
+            if (getSetting('banner_section_one_banners') != null) {
+                $banner_section_one_banners = json_decode(getSetting('banner_section_one_banners'));
+            }
+
+            $client_feedback = [];
+            if (getSetting('client_feedback') != null) {
+                $client_feedback = json_decode(getSetting('client_feedback'));
+            }
+        }else if(getTheme() == "halal"){
+
+            $sliders = [];
             $banner_section_one_banners = [];
 
             $client_feedback = [];
