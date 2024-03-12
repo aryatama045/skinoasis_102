@@ -91,13 +91,8 @@
                                 }
                             }
                         }'>
-                        @php
-                            $cat_id =$category->id;
-                            $trending_products = getSetting('top_trending_products') != null ? json_decode(getSetting('top_trending_products')) : [];
-
-                        @endphp
-
                         <?php
+                            $cat_id = $category->id;
                             $product2 = \App\Models\Product::leftJoin('product_categories','products.id','=','product_categories.product_id')
                             ->where('product_categories.category_id',$cat_id)
                             ->whereIn('products.id', $trending_products)
