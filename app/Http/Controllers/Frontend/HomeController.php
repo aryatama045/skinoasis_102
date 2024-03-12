@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
+use App\Models\Brand;
 use App\Models\Campaign;
 use App\Models\Cart;
 use App\Models\Page;
