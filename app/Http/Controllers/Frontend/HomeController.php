@@ -41,55 +41,40 @@ class HomeController extends Controller
     # homepage
     public function index()
     {
-        $blogs = Blog::isActive()->latest()->take(3);
+        $blogs = Blog::isActive()->latest()->take(3)->get();
 
-        if(getTheme() == "default"){
-            $blogs = $blogs->get();
-
-            $sliders = [];
-            if (getSetting('hero_sliders') != null) {
-                $sliders = json_decode(getSetting('hero_sliders'));
-            }
-
-            $banner_section_one_banners = [];
-            if (getSetting('banner_section_one_banners') != null) {
-                $banner_section_one_banners = json_decode(getSetting('banner_section_one_banners'));
-            }
-
-            $client_feedback = [];
-            if (getSetting('client_feedback') != null) {
-                $client_feedback = json_decode(getSetting('client_feedback'));
-            }
-        } else if(getTheme() == "skinoasis"){
-            $blogs = $blogs->get();
-
-            $sliders = [];
-            if (getSetting('hero_sliders') != null) {
-                $sliders = json_decode(getSetting('hero_sliders'));
-            }
-
-            $banner_section_one_banners = [];
-            if (getSetting('banner_section_one_banners') != null) {
-                $banner_section_one_banners = json_decode(getSetting('banner_section_one_banners'));
-            }
-
-            $client_feedback = [];
-            if (getSetting('client_feedback') != null) {
-                $client_feedback = json_decode(getSetting('client_feedback'));
-            }
-        }else if(getTheme() == "halal"){
-
-            $sliders = [];
-            $banner_section_one_banners = [];
-
-            $client_feedback = [];
-            if (getSetting('halal_client_feedback') != null) {
-                $client_feedback = json_decode(getSetting('halal_client_feedback'));
-            }
+        $sliders = [];
+        if (getSetting('hero_sliders') != null) {
+            $sliders = json_decode(getSetting('hero_sliders'));
         }
 
+        $brands = Brand::get();
+        // dd($brands);
 
-        return getView('pages.home', ['blogs' => $blogs, 'sliders' => $sliders, 'banner_section_one_banners' => $banner_section_one_banners, 'client_feedback' => $client_feedback]);
+        $banner_section_one_banners = [];
+        if (getSetting('banner_section_one_banners') != null) {
+            $banner_section_one_banners = json_decode(getSetting('banner_section_one_banners'));
+        }
+
+        $client_feedback = [];
+        if (getSetting('client_feedback') != null) {
+            $client_feedback = json_decode(getSetting('client_feedback'));
+        }
+
+        $trending1 = Blog::where('placement','1')->isActive()->latest()->take(1)->get();
+        $trending2 = Blog::where('placement','2')->isActive()->latest()->take(1)->get();
+        $trending3 = Blog::where('placement','3')->isActive()->latest()->take(1)->get();
+
+
+        return getView('pages.home',
+                    ['blogs' => $blogs,
+                        'trending1' => $trending1,
+                        'trending2' => $trending2,
+                        'trending3' => $trending3,
+                        'sliders' => $sliders,
+                        'brands' => $brands,
+                        'banner_section_one_banners' => $banner_section_one_banners,
+                        'client_feedback' => $client_feedback]);
     }
 
     # all brands
