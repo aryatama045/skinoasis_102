@@ -94,13 +94,17 @@
                         @php
                             $cat_id =$category->id;
                             $trending_products = getSetting('top_trending_products') != null ? json_decode(getSetting('top_trending_products')) : [];
-                            $products = \App\Models\Product::leftJoin('product_categories','products.id','=','product_categories.product_id')
-                                                            ->where('product_categories.category_id',$cat_id)
-                                                            ->whereIn('products.id', $trending_products)
-                                                            ->get();
+
                         @endphp
 
-                        @foreach ($products as $product)
+                        <?php
+                            $product2 = \App\Models\Product::leftJoin('product_categories','products.id','=','product_categories.product_id')
+                            ->where('product_categories.category_id',$cat_id)
+                            ->whereIn('products.id', $trending_products)
+                            ->get();
+                        ?>
+
+                        @foreach ($product2 as $product)
 
                             @include('frontend.skinoasis.pages.partials.products.favoriteProduct', [
                                 'product' => $product,
