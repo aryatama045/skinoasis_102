@@ -97,7 +97,7 @@
                             $products = \App\Models\Product::leftJoin('product_categories','products.id','=','product_categories.product_id')
                                                             ->where('product_categories.category_id',$cat_id)
                                                             ->whereIn('products.id', $trending_products)
-                                                            ->first();
+                                                            ->get();
                         @endphp
 
                         @foreach ($products as $product)
