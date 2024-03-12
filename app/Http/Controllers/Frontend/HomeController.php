@@ -88,7 +88,6 @@ class HomeController extends Controller
             }
         }
 
-        dd($sliders);
 
         return getView('pages.home', ['blogs' => $blogs, 'sliders' => $sliders, 'banner_section_one_banners' => $banner_section_one_banners, 'client_feedback' => $client_feedback]);
     }
