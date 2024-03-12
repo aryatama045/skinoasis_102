@@ -22,7 +22,7 @@
     <!--bestdeal section end-->
 
     <!--favoriteproduct products start-->
-    @include('frontend.skinoasis.pages.partials.home.5favoriteproduct')
+    <!-- @include('frontend.skinoasis.pages.partials.home.5favoriteproduct') -->
     <!--favoriteproduct products end-->
 
     <!--6bannerstwo section start-->
