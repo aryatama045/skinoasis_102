@@ -30,7 +30,7 @@
     <!--6bannerstwo section end-->
 
     <!--featured products start-->
-    @include('frontend.skinoasis.pages.partials.home.7featuredproducts')
+    
     <!--featured products end-->
 
     <!--8bannersthree section start-->
