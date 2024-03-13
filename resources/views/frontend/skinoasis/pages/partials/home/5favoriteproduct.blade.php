@@ -70,46 +70,6 @@
                 </div>
             </div>
 
-            @foreach ($categories as $category)
-                <div class="tab-pane p-0 fade " id="fav-{{ $category->id }}" role="tabpanel">
-                    <div class="owl-carousel  carousel-equal-height owl-simple carousel-with-shadow cols-lg-4 cols-md-3 cols-2" data-toggle="owl"
-                        data-owl-options='{
-                            "nav": false,
-                            "dots": true,
-                            "margin": 20,
-                            "loop": false,
-                            "responsive": {
-                                "0": {
-                                    "items": 2
-                                },
-                                "768": {
-                                    "items": 3
-                                },
-                                "992": {
-                                    "items": 4,
-                                    "nav": true
-                                }
-                            }
-                        }'>
-                        <?php
-                            dd($trending_products);
-                            $cat_id = $category->id;
-                            $product2 = \App\Models\Product::leftJoin('product_categories','products.id','=','product_categories.product_id')
-                            ->where('product_categories.category_id',$cat_id)
-                            ->whereIn('products.id', $trending_products)
-                            ->get();
-                        ?>
-
-                        @foreach ($product2 as $product)
-
-                            @include('frontend.skinoasis.pages.partials.products.favoriteProduct', [
-                                'product' => $product,
-                            ])
-
-                        @endforeach
-                    </div>
-                </div>
-            @endforeach
         </div>
 
     </div>
