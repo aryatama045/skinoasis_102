@@ -1,8 +1,9 @@
 <div class="mobile-toolbar d-block d-md-none d-lg-none">
     <div class="d-table table-layout-fixed w-100">
-        <a class="d-table-cell mobile-toolbar-item  mobile-menu-toggle">
-            <span class="mobile-toolbar-icon"><i class="fas fa-bars"></i></span><span
-                class="mobile-toolbar-label">{{ localize('Category') }}
+        <a href="{{ route('home') }}" class="d-table-cell mobile-toolbar-item  mobile-menu-toggle">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            <span class="mobile-toolbar-label">
+                {{ localize('Home') }}
             </span>
         </a>
         <div class="gshop-header-search dropdown d-table-cell mobile-toolbar-item">
@@ -73,32 +74,4 @@
         </a>
     </div>
 </div>
-<div class="offcanvas-left-menu position-fixed">
-    <div class="mobile-menu">
-        <button class="offcanvas-close"><i class="fa-solid fa-xmark"></i></button>
-        <a href="{{ route('home') }}" class="d-inline-block mb-5"><img
-                src="{{ uploadedAsset(getSetting('navbar_logo')) }}" alt="logo"></a>
-        <nav class="mobile-menu-wrapper scrollbar">
-            <ul>
-                @php
-                    $categories = [];
-                    if (getSetting('navbar_categories') != null) {
-                        $categories = \App\Models\Category::whereIn('id', json_decode(getSetting('navbar_categories')))->get();
-                    }
-                @endphp
-                @foreach ($categories as $navbarCat)
-                    <li>
-                        <a href="{{ route('products.index') }}?&category_id={{ $navbarCat->id }}"
-                            class="d-flex align-items-center">
-                            <div class="me-2 avatar-icon">
-                                <img src="{{ uploadedAsset($navbarCat->collectLocalization('thumbnail_image')) }}"
-                                    alt="" class="rounded-circle h-100 w-100">
-                            </div>
-                            <span>{{ $navbarCat->collectLocalization('name') }}</span>
-                        </a>
-                    </li>
-                @endforeach
-            </ul>
-        </nav>
-    </div>
-</div>
+

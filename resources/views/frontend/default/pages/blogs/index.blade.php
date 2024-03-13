@@ -1,33 +1,37 @@
-@extends('frontend.default.layouts.master')
+@extends('frontend.skinoasis.layouts.master')
 
 @section('title')
     {{ localize('Blogs') }} {{ getSetting('title_separator') }} {{ getSetting('system_title') }}
 @endsection
 
 @section('breadcrumb-contents')
-    <div class="breadcrumb-content">
-        <h2 class="mb-2 text-center">{{ localize('Blogs') }}</h2>
-        <nav>
-            <ol class="breadcrumb justify-content-center">
-                <li class="breadcrumb-item fw-bold" aria-current="page"><a
-                        href="{{ route('home') }}">{{ localize('Home') }}</a></li>
-                <li class="breadcrumb-item fw-bold" aria-current="page"><a
-                        href="{{ route('home.blogs') }}">{{ localize('Blogs') }}</a></li>
-            </ol>
-        </nav>
-    </div>
+    <ol class="breadcrumb justify-content-center">
+        <li class="breadcrumb-item fw-bold" aria-current="page"><a
+                href="{{ route('home') }}">{{ localize('Home') }}</a></li>
+        <li class="breadcrumb-item fw-bold" aria-current="page"><a
+                href="{{ route('home.blogs') }}">{{ localize('Blogs') }}</a></li>
+    </ol>
 @endsection
 
 @section('contents')
+
+    <!--pageHeader-->
+    @include('frontend.skinoasis.inc.pageHeader',
+            ['title' => 'Blogs'])
+    <!--pageHeader-->
+
     <!--breadcrumb-->
-    @include('frontend.default.inc.breadcrumb')
+    @include('frontend.skinoasis.inc.breadcrumb')
     <!--breadcrumb-->
 
     <!--blog details start-->
-    <section class="blog-listing-section ptb-120">
+    <section class="blog-listing-section ptb-20">
         <div class="container">
             <div class="row g-4">
-                <div class="col-xl-8">
+                <div class="col-xl-4 col-xl-push-8">
+                    @include('frontend.skinoasis.pages.partials.blogs.blogSidebar')
+                </div>
+                <div class="col-xl-8 col-xl-pull-4">
                     <div class="blog-listing">
 
                         @foreach ($blogs as $blog)
@@ -35,14 +39,14 @@
                                 <div class="thumbnail overflow-hidden">
                                     <a href="{{ route('home.blogs.show', $blog->slug) }}">
                                         <img src="{{ uploadedAsset($blog->banner) }}"
-                                            alt="{{ $blog->collectLocalization('title') }}" class="img-fluid rounded-top">
+                                            alt="{{ $blog->collectLocalization('title') }}" class="img-fluid rounded-top blog-image">
                                     </a>
                                 </div>
                                 <div class="blog-card-content p-0 mt-4">
                                     <div class="blog-meta d-flex align-items-center gap-3 mb-2">
-                                        <span class="fs-xs fw-medium"><i
+                                        <span class="fs-sm fw-medium text-black"><i
                                                 class="fa-solid fa-tags me-1"></i>{{ optional($blog->blog_category)->name }}</span>
-                                        <span class="fs-xs fw-medium"><i
+                                        <span class="fs-sm fw-medium text-black"><i
                                                 class="fa-regular fa-clock me-1"></i>{{ date('M d, Y', strtotime($blog->created_at)) }}</span>
                                     </div>
                                     <a href="{{ route('home.blogs.show', $blog->slug) }}">
@@ -62,9 +66,6 @@
                             {{ $blogs->appends(request()->input())->links() }}
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-4">
-                    @include('frontend.default.pages.partials.blogs.blogSidebar')
                 </div>
             </div>
 

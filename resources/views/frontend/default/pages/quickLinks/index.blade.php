@@ -1,25 +1,26 @@
-@extends('frontend.default.layouts.master')
+@extends('frontend.skinoasis.layouts.master')
 
 @section('title')
     {{ localize('Quick Links') }} {{ getSetting('title_separator') }} {{ getSetting('system_title') }}
 @endsection
 
 @section('breadcrumb-contents')
-    <div class="breadcrumb-content">
-        <h2 class="mb-2 text-center">{{ $page->collectLocalization('title') }}</h2>
-        <nav>
-            <ol class="breadcrumb justify-content-center">
-                <li class="breadcrumb-item fw-bold" aria-current="page"><a
-                        href="{{ route('home') }}">{{ localize('Home') }}</a></li>
-                <li class="breadcrumb-item fw-bold" aria-current="page">{{ localize('Quick Links') }}</li>
-            </ol>
-        </nav>
-    </div>
+    <ol class="breadcrumb ">
+        <li class="breadcrumb-item fw-bold" aria-current="page"><a
+                href="{{ route('home') }}">{{ localize('Home') }}</a></li>
+        <li class="breadcrumb-item fw-bold" aria-current="page">{{ localize('Quick Links') }}</li>
+    </ol>
 @endsection
 
 @section('contents')
+
+    <!--pageheader-->
+    @include('frontend.skinoasis.inc.pageHeader',
+            ['title'=> getSetting('system_title')])
+    <!--pageheader-->
+
     <!--breadcrumb-->
-    @include('frontend.default.inc.breadcrumb')
+    @include('frontend.skinoasis.inc.breadcrumb')
     <!--breadcrumb-->
 
     <!--page section start-->

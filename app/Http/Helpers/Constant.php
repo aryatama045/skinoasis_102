@@ -126,7 +126,7 @@ if (!function_exists('getView')) {
     # get view of theme
     function getView($path, $data = [])
     {
-        return view('frontend.skinoasis.' . $path, $data);
+        return view('frontend.' . getTheme() . '.' . $path, $data);
     }
 }
 

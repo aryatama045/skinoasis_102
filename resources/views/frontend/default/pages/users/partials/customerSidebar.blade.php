@@ -120,9 +120,6 @@
                 {{ localize('Track Order') }}
             </a>
         </li>
-        @if(isModuleActive('Support'))
-            @include('support::sidebar.customer_sidebar')
-        @endif
 
         <li>
             <a href="{{ route('customers.address') }}"

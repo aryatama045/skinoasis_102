@@ -1,24 +1,25 @@
+
+
+<!-- <link rel="manifest" href="{{ staticAsset('frontend/skinoasis') }}/assets/images/icons/site.webmanifest"> -->
+<link rel="mask-icon" href="{{ staticAsset('frontend/skinoasis/assets/images/icons/safari-pinned-tab.svg') }}" color="#666666">
+<link rel="shortcut icon" href="{{ staticAsset('frontend/skinoasis/assets/images/icons/favicon.ico') }}">
+
+<!-- Plugins CSS File -->
+<link rel="stylesheet" href="{{ staticAsset('frontend/skinoasis/assets/css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ staticAsset('frontend/skinoasis/assets/css/plugins/owl-carousel/owl.carousel.css') }}">
+<link rel="stylesheet" href="{{ staticAsset('frontend/skinoasis/assets/css/plugins/magnific-popup/magnific-popup.css') }}">
+<link rel="stylesheet" href="{{ staticAsset('frontend/skinoasis/assets/css/plugins/nouislider/nouislider.css') }}">
+
 <!-- 3rd party -->
 <link rel="stylesheet" href="{{ staticAsset('frontend/common/css/toastr.css') }}">
-<!-- 3rd party -->
-@if ($localLang->is_rtl == 1)
-    <link rel="stylesheet" href="{{ staticAsset('frontend/default/assets/css/main-rtl.css') }}">
-@else
-    <link rel="stylesheet" href="{{ staticAsset('frontend/default/assets/css/main.css') }}">
-@endif
-
 <link rel="stylesheet" href="{{ staticAsset('frontend/common/css/select2.css') }}">
 <link rel="stylesheet" href="{{ staticAsset('frontend/common/css/custom.css') }}">
-<link rel="stylesheet" href="{{ staticAsset('frontend/common/css/summernote-lite.min.css') }}">
-<link rel="stylesheet" href="{{ staticAsset('frontend/common/css/summernote-custom.css') }}">
 
-<style>
-    @media (min-width: 1200px) {
-        .choose-us-section::after {
-            background-image: url({{ uploadedAsset(getSetting('halal_why_choose_us_large_img')) }});
-        }
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-        .on-sale-banner {
-            background-image: url({{ uploadedAsset(getSetting('halal_on_sale_banner')) }});
-        }
-</style>
+<!-- Main CSS File -->
+<link rel="stylesheet" href="{{ staticAsset('frontend/skinoasis/assets/css/style.css') }}">
+<link rel="stylesheet" href="{{ staticAsset('frontend/default/assets/css/main-custome.css') }}">
+<link rel="stylesheet" href="{{ staticAsset('frontend/skinoasis/assets/css/demos/demo-18.css') }}">
+
+

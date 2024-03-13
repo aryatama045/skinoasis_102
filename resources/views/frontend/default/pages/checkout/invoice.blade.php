@@ -1,10 +1,12 @@
-@extends('frontend.default.layouts.master')
+@extends('frontend.skinoasis.layouts.master')
 
 @section('title')
     {{ localize('Invoice') }} {{ getSetting('title_separator') }} {{ getSetting('system_title') }}
 @endsection
 
+
 @section('contents')
+
     <!--invoice section start-->
     @if (!is_null($orderGroup))
         @php
@@ -227,7 +229,7 @@
                 </div>
             </div>
         </section>
-    @endif
+        @endif
     <!--invoice section end-->
 
     <!--refund modal-->
@@ -261,7 +263,7 @@
     </div>
 
     <!--rejection modal-->
-    @include('frontend.default.pages.checkout.inc.rejectionModal')
+    @include('frontend.skinoasis.pages.checkout.inc.rejectionModal')
 @endsection
 
 
