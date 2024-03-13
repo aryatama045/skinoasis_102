@@ -92,6 +92,7 @@
                             }
                         }'>
                         <?php
+                            dd($trending_products);
                             $cat_id = $category->id;
                             $product2 = \App\Models\Product::leftJoin('product_categories','products.id','=','product_categories.product_id')
                             ->where('product_categories.category_id',$cat_id)
