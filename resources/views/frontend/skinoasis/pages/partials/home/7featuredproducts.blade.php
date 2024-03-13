@@ -60,7 +60,7 @@
                 <div class="tab-pane p-0 fade " id="featured-@php if($product->categories()->count() > 0){
                             foreach ($product->categories as $category) {
                                 echo $category->id .' ';
-                            }
+                            } }
                         @endphp" role="tabpanel">
                     <div class="owl-carousel  carousel-equal-height owl-simple carousel-with-shadow cols-lg-4 cols-md-3 cols-2" data-toggle="owl"
                         data-owl-options='{
