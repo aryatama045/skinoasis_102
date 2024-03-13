@@ -22,7 +22,7 @@ class ThemeMiddleware
             $active_themes = getSetting('active_themes') != null ? json_decode(getSetting('active_themes')) : [1];
             $theme   = session('theme');
 
-            dd($active_themes, $theme);
+            // dd($active_themes, $theme);
 
             if(!is_null($theme)){
                 $theme   = Theme::whereIn('id', $active_themes)->where('code', $theme)->first();
