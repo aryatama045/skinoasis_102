@@ -21,7 +21,7 @@ class ProductController extends Controller
         $limit = 8;
 
         $product = Product::where('is_popular', 1)->get();
-        // dd($kategori);
+
         $tags = Tag::all();
         return getView('pages.products.index', [
             'product'      => $product,
