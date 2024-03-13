@@ -25,7 +25,7 @@
 
                 @php
                     $trending_product_categories = getSetting('trending_product_categories') != null ? json_decode(getSetting('trending_product_categories')) : [];
-                    $categories = \App\Models\Category::whereIn('id', $trending_product_categories)->get();
+                    $categories = \App\Models\Category::whereIn('categories.id', $trending_product_categories)->get();
                 @endphp
                 @foreach ($categories as $category)
                 <li class="nav-item">
@@ -59,7 +59,7 @@
                     }'>
                     @php
                         $trending_products = getSetting('top_trending_products') != null ? json_decode(getSetting('top_trending_products')) : [];
-                        $products = \App\Models\Product::whereIn('products.id', $trending_products)->get();
+                        $products = \App\Models\ProductHome::whereIn('products.id', $trending_products)->get();
                     @endphp
 
                     @foreach ($products as $product)
