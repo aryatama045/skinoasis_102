@@ -18,22 +18,6 @@
             <h4 class="subtitle text-uppercase mb-4">
                 {{ localize('Products Favorite') }}
             </h4>
-            <ul class="nav nav-pills justify-content-center" style="display:none;" role="tablist">
-                <li class="nav-item">
-                    <a href="#arrival-all" class="nav-link font-size-normal letter-spacing-large active" data-toggle="tab" role="tab">All</a>
-                </li>
-
-                @php
-                    $trending_product_categories = getSetting('trending_product_categories') != null ? json_decode(getSetting('trending_product_categories')) : [];
-                    $categories = \App\Models\Category::whereIn('id', $trending_product_categories)->get();
-                @endphp
-                @foreach ($categories as $category)
-                <li class="nav-item">
-                    <a href="#fav-{{ $category->id }}" class="nav-link font-size-normal letter-spacing-large" data-toggle="tab" role="tab">{{ $category->collectLocalization('name') }}</a>
-                </li>
-                @endforeach
-
-            </ul>
         </div>
 
         <div class="tab-content tab-content-carousel " data-aos="fade-up">
@@ -57,10 +41,10 @@
                             }
                         }
                     }'>
-                    <?php
+                    @php
                         $trending_products = getSetting('top_trending_products') != null ? json_decode(getSetting('top_trending_products')) : [];
-                        $products = \App\Models\Product::whereIn('products.id', $trending_products)->get();
-                    ?>
+                        $products = \App\Models\Product::whereIn('id', $trending_products)->get();
+                    @endphp
 
                     @foreach ($products as $product)
                             @include('frontend.skinoasis.pages.partials.products.favoriteProduct', [
