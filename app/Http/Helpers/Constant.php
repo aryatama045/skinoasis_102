@@ -142,7 +142,7 @@ if (!function_exists('getRender')) {
     # get view of theme with render
     function getRender($path, $data = [])
     {
-        return view('frontend.default'. '.' . $path, $data)->render();
+        return view('frontend.' . getTheme() . '.' . $path, $data)->render();
     }
 }
 
