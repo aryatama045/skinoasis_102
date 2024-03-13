@@ -13,8 +13,24 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+
+    # index
+    public function index(){
+        $searchKey = null;
+        $limit = 8;
+
+        $product = Product::where('is_popular', 1)->get();
+        // dd($kategori);
+        $tags = Tag::all();
+        return getView('pages.products.index', [
+            'product'      => $product,
+            'tags'          => $tags,
+        ]);
+    }
+
+
     # product listing
-    public function index(Request $request)
+    public function allProduct(Request $request)
     {
         $searchKey = null;
         $per_page = 9;
@@ -61,6 +77,13 @@ class ProductController extends Controller
             $products = $products->whereIn('id', $product_category_product_ids);
         }
 
+        # by brand
+        if ($request->brand_id && $request->brand_id != null) {
+            // $product_category_product_ids = Product::where('brand_id', $request->brand_id)->get();
+            // dd($request->brand_id);
+            $products = $products->where('brand_id', $request->brand_id);
+        }
+
         # by tag
         if ($request->tag_id && $request->tag_id != null) {
             $product_tag_product_ids = ProductTag::where('tag_id', $request->tag_id)->pluck('product_id');
@@ -71,7 +94,8 @@ class ProductController extends Controller
         $products = $products->paginate(paginationNumber($per_page));
 
         $tags = Tag::all();
-        return getView('pages.products.index', [
+
+        return getView('pages.products.allproduct', [
             'products'      => $products,
             'searchKey'     => $searchKey,
             'per_page'      => $per_page,
