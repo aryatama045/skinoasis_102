@@ -42,8 +42,8 @@
                         }
                     }'>
                     @php
-                        $trending_products = getSetting('top_trending_products') != null ? json_decode(getSetting('top_trending_products')) : [];
-                        $products = \App\Models\Product::whereIn('id', $trending_products)->get();
+                        $best_selling_products = getSetting('best_selling_products') != null ? json_decode(getSetting('best_selling_products')) : [];
+                        $products = \App\Models\Product::whereIn('id', $best_selling_products)->get();
                     @endphp
 
                     @foreach ($products as $product)
