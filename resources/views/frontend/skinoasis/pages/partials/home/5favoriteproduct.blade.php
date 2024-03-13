@@ -57,10 +57,10 @@
                             }
                         }
                     }'>
-                    @php
+                    <?php
                         $trending_products = getSetting('top_trending_products') != null ? json_decode(getSetting('top_trending_products')) : [];
-                        $products = \App\Models\ProductHome::whereIn('products.id', $trending_products)->get();
-                    @endphp
+                        $products = DB::table('products')->whereIn('products.id', $trending_products)->get();
+                    ?>
 
                     @foreach ($products as $product)
                             @include('frontend.skinoasis.pages.partials.products.favoriteProduct', [
