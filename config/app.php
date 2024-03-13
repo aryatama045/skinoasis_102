@@ -82,7 +82,7 @@ return [
 
     'locale' => env('DEFAULT_LANGUAGE', 'en'),
     'currency_code' => env('DEFAULT_CURRENCY', 'usd'),
-    'theme' => env('APP_THEME', 'default'),
+    'theme' => env('APP_THEME', 'skinoasis'),
 
     /*
     |--------------------------------------------------------------------------
