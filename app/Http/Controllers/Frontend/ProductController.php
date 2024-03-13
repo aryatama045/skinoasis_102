@@ -139,7 +139,11 @@ class ProductController extends Controller
                         ->select('users.name as name_user', 'product_testimoni.title', 'product_testimoni.rating', 'product_testimoni.comment', 'product_testimoni.created_at as tanggal')
                         ->get();
 
-            return getView('pages.products.show', ['product' => $product, 'relatedProducts' => $relatedProducts, 'product_page_widgets' => $product_page_widgets]);
+            return getView('pages.products.show',
+                        ['review' => $review ,
+                        'product' => $product,
+                        'relatedProducts' => $relatedProducts,
+                        'product_page_widgets' => $product_page_widgets]);
         }
         catch(\Throwable $e){
             return view('errors.not_found');
