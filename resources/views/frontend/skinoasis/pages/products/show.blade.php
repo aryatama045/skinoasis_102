@@ -62,11 +62,6 @@
 
 @section('contents')
 
-    <!-- <div class="page-header text-center" style="background-image: url('{{ staticAsset('frontend/skinoasis/assets/images/page-header-bg.jpg') }}')">
-        <div class="container">
-            <h1 class="page-title"> <span> @yield('title', getSetting('system_title'))</span></h1>
-        </div>
-    </div> -->
     <br>
     <center>
         <div>
@@ -126,21 +121,10 @@
                         <div class="product-details">
                             <h1 class="product-title mt-xs-3">{{ $product->collectLocalization('name') }}</h1><!-- End .product-title -->
 
-                            <!-- <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 80%;"></div>
-                                </div>
-                                <a class="ratings-text" href="#product-review-link" id="review-link">( 2 Reviews )</a>
-                            </div> -->
 
                             <div class="product-price">
                                 @include('frontend.default.pages.partials.products.pricing', compact('product'))
                             </div><!-- End .product-price -->
-
-                            <!-- selected variation pricing -->
-                            <div class="pricing variation-pricing mt-2 d-none">
-                            </div>
-                            <!-- selected variation pricing -->
 
                             <div class="product-content">
                                 <p>{{ $product->collectLocalization('short_description') }}</p>
@@ -212,7 +196,7 @@
                                         <div class="tt-category-tag mt-4 mt-4">
                                             @foreach ($product->categories as $category)
                                                 <a href="{{ route('products.index') }}?&category_id={{ $category->id }}"
-                                                    class="text-muted fs-xxs">{{ $category->collectLocalization('name') }}</a>
+                                                    class="text-muted fs-sm">{{ $category->collectLocalization('name') }}</a>
                                             @endforeach
                                         </div>
                                     @endif
