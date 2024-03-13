@@ -21,6 +21,11 @@
             </ul>
         </div>
 
+        @php
+            $trending_products = getSetting('top_trending_products') != null ? json_decode(getSetting('top_trending_products')) : [];
+            $products = \App\Models\Product::whereIn('id', $trending_products)->get();
+        @endphp
+
         <div class="tab-content tab-content-carousel">
             <div class="tab-pane p-0 fade show active" id="featured-all" role="tabpanel">
                 <div class="owl-carousel  carousel-equal-height owl-simple carousel-with-shadow cols-lg-4 cols-md-3 cols-2" data-toggle="owl"
@@ -42,10 +47,6 @@
                             }
                         }
                     }'>
-                    @php
-                        $trending_products = getSetting('top_trending_products') != null ? json_decode(getSetting('top_trending_products')) : [];
-                        $products = \App\Models\Product::whereIn('id', $trending_products)->get();
-                    @endphp
 
                     @foreach ($products as $product)
                             @include('frontend.skinoasis.pages.partials.products.favoriteProduct', [
@@ -55,8 +56,12 @@
                 </div>
             </div>
 
-            @foreach ($categories as $category)
-                <div class="tab-pane p-0 fade " id="featured-{{ $category->id }}" role="tabpanel">
+            @foreach ($products as $product)
+                <div class="tab-pane p-0 fade " id="featured-@php if($product->categories()->count() > 0){
+                            foreach ($product->categories as $category) {
+                                echo $category->id .' ';
+                            }
+                        @endphp" role="tabpanel">
                     <div class="owl-carousel  carousel-equal-height owl-simple carousel-with-shadow cols-lg-4 cols-md-3 cols-2" data-toggle="owl"
                         data-owl-options='{
                             "nav": false,
@@ -76,19 +81,12 @@
                                 }
                             }
                         }'>
-                        @php
-                            $cat_id =$category->id;
-                            $trending_products = getSetting('top_trending_products') != null ? json_decode(getSetting('top_trending_products')) : [];
-                            $products = \App\Models\Product::leftJoin('product_categories','products.id','=','product_categories.product_id')->where('product_categories.category_id',$cat_id)->whereIn('products.id', $trending_products)->get();
-                        @endphp
 
-                        @foreach ($products as $product)
+                        @include('frontend.skinoasis.pages.partials.products.favoriteProduct', [
+                            'product' => $product,
+                        ])
 
-                            @include('frontend.skinoasis.pages.partials.products.favoriteProduct', [
-                                'product' => $product,
-                            ])
 
-                        @endforeach
                     </div>
                 </div>
             @endforeach
