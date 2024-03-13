@@ -1,22 +1,6 @@
-<!-- Plugins JS File -->
 <script src="{{ staticAsset('frontend/default/assets/js/vendors/jquery-3.6.4.min.js') }}"></script>
-<!-- Plugins JS File -->
-<script src="{{ staticAsset('frontend/skinoasis/assets/js/jquery.min.js') }}"></script>
 <script src="{{ staticAsset('frontend/default/assets/js/vendors/jquery-ui.min.js') }}"></script>
-<script src="{{ staticAsset('frontend/skinoasis/assets/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ staticAsset('frontend/skinoasis/assets/js/jquery.hoverIntent.min.js') }}"></script>
-
-<script src="{{ staticAsset('frontend/skinoasis/assets/js/jquery.waypoints.min.js') }}"></script>
-<script src="{{ staticAsset('frontend/skinoasis/assets/js/superfish.min.js') }}"></script>
-<script src="{{ staticAsset('frontend/skinoasis/assets/js/owl.carousel.min.js') }}"></script>
-<script src="{{ staticAsset('frontend/skinoasis/assets/js/imagesloaded.pkgd.min.js') }}"></script>
-<script src="{{ staticAsset('frontend/skinoasis/assets/js/isotope.pkgd.min.js') }}"></script>
-
-<script src="{{ staticAsset('frontend/skinoasis/assets/js/wNumb.js') }}"></script>
-<script src="{{ staticAsset('frontend/skinoasis/assets/js/nouislider.min.js') }}"></script>
-<script src="{{ staticAsset('frontend/skinoasis/assets/js/bootstrap-input-spinner.js') }}"></script>
-<script src="{{ staticAsset('frontend/skinoasis/assets/js/jquery.elevateZoom.min.js') }}"></script>
-
+<script src="{{ staticAsset('frontend/default/assets/js/vendors/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ staticAsset('frontend/default/assets/js/vendors/swiper-bundle.min.js') }}"></script>
 <script src="{{ staticAsset('frontend/default/assets/js/vendors/jquery.magnific-popup.min.js') }}"></script>
 <script src="{{ staticAsset('frontend/default/assets/js/vendors/simplebar.min.js') }}"></script>
@@ -24,40 +8,13 @@
 <script src="{{ staticAsset('frontend/default/assets/js/vendors/isotop.pkgd.min.js') }}"></script>
 <script src="{{ staticAsset('frontend/default/assets/js/vendors/countdown.min.js') }}"></script>
 <script src="{{ staticAsset('frontend/default/assets/js/vendors/range-slider.js') }}"></script>
-
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-<!-- Main JS File -->
-
-<script src="{{ staticAsset('frontend/skinoasis/assets/main.js') }}"></script>
-
-<script src="{{ staticAsset('frontend/skinoasis/assets/js/main.js') }}"></script>
-<script src="{{ staticAsset('frontend/skinoasis/assets/js/main.min.js') }}"></script>
-
+<script src="{{ staticAsset('frontend/default/assets/js/vendors/waypoints.js') }}"></script>
 <script src="{{ staticAsset('frontend/default/assets/js/vendors/counterup.min.js') }}"></script>
 <script src="{{ staticAsset('frontend/default/assets/js/vendors/clipboard.min.js') }}"></script>
-
 
 <script src="{{ staticAsset('frontend/common/js/toastr.min.js') }}"></script>
 <script src="{{ staticAsset('frontend/common/js/select2.js') }}"></script>
 <script src="{{ staticAsset('frontend/default/assets/js/app.js') }}"></script>
-
-<script src="{{ staticAsset('frontend/skinoasis/assets/js/demos/demo-18.js') }}"></script>
-
-
-<!--Start of Tawk.to Script-->
-<!-- <script type="text/javascript">
-    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-    (function(){
-    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-    s1.async=true;
-    s1.src='https://embed.tawk.to/65a09b838d261e1b5f5225bd/1hjtluuil';
-    s1.charset='UTF-8';
-    s1.setAttribute('crossorigin','*');
-    s0.parentNode.insertBefore(s1,s0);
-    })();
-</script> -->
-<!--End of Tawk.to Script-->
 
 <script>
     "use strict"
@@ -65,127 +22,13 @@
     // runs when the document is ready
     $(document).ready(function() {
         initIsotop();
-
-        AOS.init();
-
-        // zoom
-        if ( $.fn.elevateZoom ) {
-            $('#product-zoom').elevateZoom({
-                gallery:'product-zoom-gallery',
-                galleryActiveClass: 'active',
-                zoomType: "inner",
-                cursor: "crosshair",
-                zoomWindowFadeIn: 400,
-                zoomWindowFadeOut: 400,
-                responsive: true
-            });
-
-            // On click change thumbs active item
-            $('.product-gallery-item').on('click', function (e) {
-                $('#product-zoom-gallery').find('a').removeClass('active');
-                $(this).addClass('active');
-
-                e.preventDefault();
-            });
-
-            var ez = $('#product-zoom').data('elevateZoom');
-
-            // Open popup - product images
-            $('#btn-product-gallery').on('click', function (e) {
-                if ( $.fn.magnificPopup ) {
-                    $.magnificPopup.open({
-                        items: ez.getGalleryList(),
-                        type: 'image',
-                        gallery:{
-                            enabled:true
-                        },
-                        fixedContentPos: false,
-                        removalDelay: 600,
-                        closeBtnInside: false
-                    }, 0);
-
-                    e.preventDefault();
-                }
-            });
-        }
-
-        // Masonry / Grid layout fnction
-        var layoutInit = function( container, selector, space ) {
-            $(container).each(function () {
-                var $this = $(this);
-
-                $this.isotope({
-                    itemSelector: selector,
-                    layoutMode: ( $this.data('layout') ? $this.data('layout'): 'masonry' ),
-                    masonry: {
-                        columnWidth: space
-                    }
-                });
-            });
-        }
-
-        var isotopeFilter = function( filterNav, container) {
-            $(filterNav).find('a').on('click', function(e) {
-                var $this = $(this),
-                    filter = $this.attr('data-filter');
-
-                // Remove active class
-                $(filterNav).find('.active').removeClass('active');
-
-                // Init filter
-                $(container).isotope({
-                    filter: filter,
-                    transitionDuration: '0.7s'
-                });
-
-                // Add active class
-                $this.closest('li').addClass('active');
-                e.preventDefault();
-            });
-        }
-
-        /* Masonry / Grid Layout & Isotope Filter for blog/portfolio etc... */
-        if ( typeof imagesLoaded === 'function' && $.fn.isotope) {
-            // Portfolio
-            $('.portfolio-container').imagesLoaded(function () {
-                // Portfolio Grid/Masonry
-                layoutInit( '.portfolio-container', '.portfolio-item' ); // container - selector
-                // Portfolio Filter
-                isotopeFilter( '.portfolio-filter',  '.portfolio-container'); //filterNav - .container
-            });
-
-            // Blog
-            $('.entry-container').imagesLoaded(function () {
-                // Blog Grid/Masonry
-                layoutInit( '.entry-container', '.entry-item' ); // container - selector
-                // Blog Filter
-                isotopeFilter( '.entry-filter',  '.entry-container'); //filterNav - .container
-            });
-
-            // Product masonry product-masonry.html
-            $('.product-gallery-masonry').imagesLoaded(function () {
-                // Products Grid/Masonry
-                layoutInit( '.product-gallery-masonry', '.product-gallery-item' ); // container - selector
-            });
-
-            // Products - Demo 11
-            $('.products-container').imagesLoaded(function () {
-                // Products Grid/Masonry
-                layoutInit( '.products-container', '.product-item' ); // container - selector
-                // Product Filter
-                isotopeFilter( '.product-filter',  '.products-container'); //filterNav - .container
-            });
-
-            layoutInit('.grid', '.grid-item', '.grid-space');
-        }
-
-
     });
 
     // tooltip
     $(function() {
         $('[data-bs-toggle="tooltip"]').tooltip();
     });
+
 
     //isotop filter grid 
     function initIsotop() {
@@ -199,7 +42,6 @@
             $(this).addClass("active");
         });
     }
-
 
     // copy coupon code
     $(function() {
@@ -291,7 +133,7 @@
     }
     addressModalSelect2();
 
-    // ajax toast
+    // ajax toast 
     function notifyMe(level, message) {
         if (level == 'danger') {
             level = 'error';
@@ -650,4 +492,3 @@
         @endif
     }
 </script>
-

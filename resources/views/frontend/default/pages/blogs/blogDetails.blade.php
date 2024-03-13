@@ -1,31 +1,31 @@
-@extends('frontend.skinoasis.layouts.master')
+@extends('frontend.default.layouts.master')
 
 @section('title')
-    {{ localize('Blogs') }} {{ getSetting('title_separator') }} {{ getSetting('system_title') }}
+    {{ localize('Blog Details') }} {{ getSetting('title_separator') }} {{ getSetting('system_title') }}
 @endsection
 
 @section('breadcrumb-contents')
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item fw-bold" aria-current="page"><a
-                href="{{ route('home') }}">{{ localize('Home') }}</a></li>
-        <li class="breadcrumb-item fw-bold" aria-current="page"><a
-                href="{{ route('home.blogs') }}">{{ localize('Blogs') }}</a></li>
-    </ol>
+    <div class="breadcrumb-content">
+        <h2 class="mb-2 text-center">{{ $blog->collectLocalization('title') }}</h2>
+        <nav>
+            <ol class="breadcrumb justify-content-center">
+                <li class="breadcrumb-item fw-bold" aria-current="page"><a
+                        href="{{ route('home') }}">{{ localize('Home') }}</a></li>
+                <li class="breadcrumb-item fw-bold" aria-current="page"><a
+                        href="{{ route('home.blogs') }}">{{ localize('Blogs') }}</a></li>
+                <li class="breadcrumb-item fw-bold" aria-current="page">{{ localize('Blog Details') }}</li>
+            </ol>
+        </nav>
+    </div>
 @endsection
 
 @section('contents')
-
-    <!--pageHeader-->
-    @include('frontend.skinoasis.inc.pageHeader',
-            ['title' => optional($blog->blog_category)->name])
-    <!--pageHeader-->
-
     <!--breadcrumb-->
-    @include('frontend.skinoasis.inc.breadcrumb')
+    @include('frontend.default.inc.breadcrumb')
     <!--breadcrumb-->
 
     <!--blog details start-->
-    <section class="blog-details ptb-20">
+    <section class="blog-details ptb-120">
         <div class="container">
             <div class="row g-4">
                 <div class="col-xl-8">
@@ -35,9 +35,9 @@
                                 class="img-fluid">
                         </div>
                         <div class="blog-meta d-flex align-items-center gap-3 flex-wrap mt-5">
-                            <span class="fs-sm fw-medium text-black"><i
+                            <span class="fs-xs fw-medium"><i
                                     class="fa-solid fa-tags me-1"></i>{{ optional($blog->blog_category)->name }}</span>
-                            <span class="fs-sm fw-medium text-black"><i
+                            <span class="fs-xs fw-medium"><i
                                     class="fa-regular fa-clock me-1"></i>{{ date('M d, Y', strtotime($blog->created_at)) }}</span>
 
                         </div>

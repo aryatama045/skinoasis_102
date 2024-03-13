@@ -1,7 +1,10 @@
-<nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
+<div class="gstore-breadcrumb position-relative z-1 overflow-hidden mt--50">
+    @include('frontend.default.inc.breadcrumbBgImages.' . getTheme())
     <div class="container">
-
-        @yield('breadcrumb-contents')
-
-    </div><!-- End .container -->
-</nav><!-- End .breadcrumb-nav -->
+        <div class="row">
+            <div class="col-12">
+                @yield('breadcrumb-contents')
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,139 +1,116 @@
+<div class="footer-curve position-relative overflow-hidden">
+    <span class="position-absolute section-curve-wrapper top-0 h-100"
+        data-background="{{ staticAsset('frontend/default/assets/img/shapes/section-curve.png') }}"></span>
+</div>
 
-<footer class="footer footer-white">
-    <div class="footer-middle">
+<footer class="gshop-footer position-relative pt-8 bg-dark z-1 overflow-hidden">
+    @include('frontend.default.inc.footerBgImages.' . getTheme())
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-5 col-lg-6">
+                <div class="gshop_subscribe_form text-center">
+                    <h4 class="text-white gshop-title">{{ localize('Subscribe to the us') }}<mark
+                            class="p-0 position-relative text-secondary bg-transparent"> {{ localize('New Arrivals') }}
+                            <img src="{{ staticAsset('frontend/default/assets/img/shapes/border-line.svg') }}"
+                                alt="border line" class="position-absolute border-line"></mark><br
+                            class="d-none d-sm-block">{{ localize('& Other Information.') }}</h4>
+                    <form class="mt-5 d-flex align-items-center bg-white rounded subscribe_form"
+                        action="{{ route('subscribe.store') }}" method="POST">
+                        @csrf
+                        {!! RecaptchaV3::field('recaptcha_token') !!}
+                        <input type="email" class="form-control" placeholder="{{ localize('Enter Email Address') }}"
+                            type="email" name="email" required>
+                        <button type="submit"
+                            class="btn btn-primary flex-shrink-0">{{ localize('Subscribe Now') }}</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <span class="gradient-spacer my-8 d-block"></span>
+        <div class="row g-5">
+            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                <div class="footer-widget">
+                    <h5 class="text-white mb-4">{{ localize('Category') }}</h5>
+                    @php
+                        $footer_categories = getSetting('footer_categories') != null ? json_decode(getSetting('footer_categories')) : [];
+                        $categories = \App\Models\Category::whereIn('id', $footer_categories)->get();
+                    @endphp
+                    <ul class="footer-nav">
+                        @foreach ($categories as $category)
+                            <li><a
+                                    href="{{ route('products.index') }}?&category_id={{ $category->id }}">{{ $category->collectLocalization('name') }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                <div class="footer-widget">
+                    <h5 class="text-white mb-4">{{ localize('Quick Links') }}</h5>
+                    @php
+                        $quick_links = getSetting('quick_links') != null ? json_decode(getSetting('quick_links')) : [];
+                        $pages = \App\Models\Page::whereIn('id', $quick_links)->get();
+                    @endphp
+                    <ul class="footer-nav">
+                        @foreach ($pages as $page)
+                            <li><a
+                                    href="{{ route('home.pages.show', $page->slug) }}">{{ $page->collectLocalization('title') }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                <div class="footer-widget">
+                    <h5 class="text-white mb-4">{{ localize('Customer Pages') }}</h5>
+                    <ul class="footer-nav">
+                        <li><a href="{{ route('customers.dashboard') }}">{{ localize('Your Account') }}</a></li>
+                        <li><a href="{{ route('customers.orderHistory') }}">{{ localize('Your Orders') }}</a></li>
+                        <li><a href="{{ route('customers.wishlist') }}">{{ localize('Your Wishlist') }}</a></li>
+                        <li><a href="{{ route('customers.address') }}">{{ localize('Address Book') }}</a></li>
+                        <li><a href="{{ route('customers.profile') }}">{{ localize('Update Profile') }}</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                <div class="footer-widget">
+                    <h5 class="text-white mb-4">{{ localize('Contact Info') }}</h5>
+                    <ul class="footer-nav">
+                        <li class="text-white pb-2 fs-xs">{{ getSetting('topbar_location') }}</li>
+                        <li class="text-white pb-2 fs-xs">{{ getSetting('navbar_contact_number') }}</li>
+                        <li class="text-white pb-2 fs-xs">{{ getSetting('topbar_email') }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright pt-120 pb-3">
+        <span class="gradient-spacer d-block mb-3"></span>
         <div class="container">
-            <div class="row">
-                <div class="col-sm-6 col-lg-6">
-                    <div class="widget widget-about">
-                        <img src="{{ uploadedAsset(getSetting('footer_logo')) }}" class="footer-logo" alt="Footer Logo" width="200" height="25">
-                        <p>
-                            <ol class="footer-about">
-                                <li> We take the doubt out of whether you need by provide a safe, high quality, high efficacy products</li>
-                                <li> To make a high performance product and the place sharing and make experience together for our legacy.</li>
-                                <li> You can always count on St. Morita Farma support. Service, quality, efficacy and delivery has been our concerning motto</li>
-                                <li> Problem solving, knowledgeable, representative responsive technical service, ready accessible information and comprehensive supports</li>
-                                <li> This is what St. Morita Farma family and its Environment need to survive and grow in today`s competitive world</li>
-                            </ol>
-                        </p>
-
-                    </div><!-- End .widget about-widget -->
-                </div><!-- End .col-sm-6 col-lg-4 -->
-
-                <div class="col-sm-6 col-lg-3">
-                    <div class="widget">
-                        <h4 class="widget-title">Head Office</h4><!-- End .widget-title -->
-
-                        <ul class="widget-list">
-                            <li>
-                                <div class="row">
-                                    <div class="col-2">
-                                        <img src="{{staticAsset('frontend/skinoasis/assets/svg/lokasi.png')}}" style="width: 100px">
-                                    </div>
-                                    <div class="col-10">
-                                        Jl. Mesjid Bendungan 1 No.10, RW.7, Cawang, Kec. Kramat jati, Kota Jakarta Timur, DKI Jakarta 13630 
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="row">
-                                    <div class="col-2">
-                                        <img src="{{staticAsset('frontend/skinoasis/assets/svg/telpon.png')}}" style="width: 100px">
-                                    </div>
-                                    <div class="col-10" style="padding-top: 8px;">081211801703, (021) 8091787</div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="row">
-                                    <div class="col-2">
-                                        <img src="{{staticAsset('frontend/skinoasis/assets/svg/fax.png')}}" style="width: 100px">
-                                    </div>
-                                    <div class="col-10" style="padding-top: 8px;">(021) 8091787</div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="row">
-                                    <div class="col-2">
-                                        <img src="{{staticAsset('frontend/skinoasis/assets/svg/mail.png')}}" style="width: 100px">
-                                    </div>
-                                    <div class="col-10" style="padding-top: 8px;">cs@stmorita.com</div>
-                                </div>
-                            </li>
-                        </ul><!-- End .widget-list -->
-                    </div><!-- End .widget -->
-                </div><!-- End .col-sm-6 col-lg-4 -->
-
-                <div class="col-sm-6 col-lg-3">
-                    <div class="widget">
-                        <h4 class="widget-title">Factory</h4><!-- End .widget-title -->
-
-                        <ul class="widget-list">
-                            <ul class="widget-list">
-                            <li>
-                                <div class="row">
-                                    <div class="col-2">
-                                        <img src="{{staticAsset('frontend/skinoasis/assets/svg/lokasi.png')}}" style="width: 100px">
-                                    </div>
-                                  
-                                    <div class="col-10">
-                                        Jl. Pinang F16 No.21 Delta Silicon 3 Cikarang Pusat, Indonesia
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="row">
-                                    <div class="col-2">
-                                        <img src="{{staticAsset('frontend/skinoasis/assets/svg/telpon.png')}}" style="width: 100px">
-                                    </div>
-                                  
-                                    <div class="col-10" style="padding-top: 8px;">081211801703, (021) 8091787</div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="row">
-                                    <div class="col-2">
-                                        <img src="{{staticAsset('frontend/skinoasis/assets/svg/fax.png')}}" style="width: 100px">
-                                    </div>
-                                  
-                                    <div class="col-10" style="padding-top: 8px;">(021) 8091787</div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="row">
-                                    <div class="col-2">
-                                        <img src="{{staticAsset('frontend/skinoasis/assets/svg/mail.png')}}" style="width: 100px">
-                                    </div>
-                                  
-                                    <div class="col-10" style="padding-top: 8px;">cs@stmorita.com</div>
-                                </div>
-                            </li>
-                        </ul>
-                        </ul><!-- End .widget-list -->
-                    </div><!-- End .widget -->
-                </div><!-- End .col-sm-6 col-lg-4 -->
-
-            </div><!-- End .row -->
-        </div><!-- End .container -->
-    </div><!-- End .footer-middle -->
-
-    <div class="footer-bottom mb-5">
-        <div class="container">
-            <p class="footer-copyright">Copyright.</p><!-- End .footer-copyright -->
-            <ul class="footer-menu">
-                <li><a href="https://skinoasis.solusiitkreasi.com/pages/kebijakan-privasi">Kebijakan Privasi</a></li>
-                <li><a href="https://skinoasis.solusiitkreasi.com/pages/terms-conditions">Syarat & Ketentuan</a></li>
-                <li>
-                    <img src="{{ uploadedAsset(getSetting('accepted_payment_banner')) }}">
-                    <!-- <img src="https://scarlettwhitening.com/_next/static/media/bank_transfer.df4f2d18.svg"> -->
-                </li>
-            </ul><!-- End .footer-menu -->
-
-            <div class="social-icons social-icons-color">
-                <!-- <span class="social-label">Social Media</span> -->
-                <a href="#" class="social-icon social-facebook" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
-                <a href="#" class="social-icon social-twitter" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
-                <a href="#" class="social-icon social-instagram" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
-                <a href="#" class="social-icon social-youtube" title="Youtube" target="_blank"><i class="icon-youtube"></i></a>
-            </div><!-- End .soial-icons -->
-        </div><!-- End .container -->
-    </div><!-- End .footer-bottom -->
-</footer><!-- End .footer -->
+            <div class="row align-items-center g-3">
+                <div class="col-lg-4">
+                    <div class="copyright-text text-light">
+                        {!! getSetting('copyright_text') !!}
+                    </div>
+                </div>
+                <div class="col-lg-4 d-none d-lg-block">
+                    <div class="logo-wrapper text-center">
+                        <a href="{{ route('home') }}" class="logo"><img
+                                src="{{ uploadedAsset(getSetting('footer_logo')) }}" alt="footer logo"
+                                class="img-fluid"></a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="footer-payments-info d-flex align-items-center justify-content-lg-end gap-2">
+                        <div
+                            class="rounded-1 d-inline-flex align-items-center justify-content-center p-2 flex-shrink-0">
+                            <img src="{{ uploadedAsset(getSetting('accepted_payment_banner')) }}"
+                                alt="accepted_payment" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
